@@ -16,8 +16,8 @@ pipeline {
 
         stage('Run Spring Application'){
             steps {
-                withEnv(["PATH=/usr/local/bin:$PATH"]){
-                    sh "java -jar target/demo-0.0.1-SNAPSHOT.jar"
+                withEnv(["PATH=/usr/local/bin:$PATH", "BUILD_ID=dontkill"]){
+                    sh "nohup java -jar target/demo-0.0.1-SNAPSHOT.jar &"
                 }
             }
         }
