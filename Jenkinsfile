@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Spring Application'){
             steps {
-                withEnv(["PATH=/usr/local/bin:$PATH", "BUILD_ID=dontkill"]){
+                withEnv(["PATH=/usr/local/bin:$PATH; JENKINS_NODE_NAME=dontkill"]){
                     sh "nohup java -jar target/demo-0.0.1-SNAPSHOT.jar &"
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
 
     post {
         always {
-            clearWs()
+            cleanWs()
         }
         success {
             echo 'Success'
