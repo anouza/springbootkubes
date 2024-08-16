@@ -59,7 +59,7 @@ pipeline {
                     sh "kubectl --kubeconfig=${KUBE_CONFIG_PATH} apply -f deployment.yaml -n ${KUBE_NAMESPACE}"
                     
                     // ตรวจสอบสถานะของ deployment
-                    sh "kubectl --kubeconfig=${KUBE_CONFIG_PATH} rollout status knightboyz/springboot-app -n ${KUBE_NAMESPACE}"
+                    sh "kubectl --kubeconfig=${KUBE_CONFIG_PATH} rollout status deployment/springboot-app -n ${KUBE_NAMESPACE}"
                 }
             }
         }

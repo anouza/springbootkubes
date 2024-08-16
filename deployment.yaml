@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: springboot-app
-          image: springboot-app:latest
+          image: knightboyz/springboot-app:latest
           resources:
             requests:
               memory: "128Mi"
