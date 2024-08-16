@@ -43,10 +43,12 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-                // Login เข้า Docker Hub และ push Docker image ที่สร้างขึ้น
-                withCredentials([string(credentialsId: 'knightboyz', variable: 'DOCKERHUB_PASSWORD')]) {
-                    sh "echo ${DOCKERHUB_PASSWORD} | docker login -u knightboyz --password-stdin"
-                    sh "docker push ${DOCKER_IMAGE}"
+                withEnv(["PATH=/usr/local/bin:$PATH"]){ // only for macos dev - linux will not need this
+                    // Login เข้า Docker Hub และ push Docker image ที่สร้างขึ้น
+                    withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
+                        sh "echo ${DOCKERHUB_PASSWORD} | docker login -u knightboyz --password-stdin"
+                        sh "docker push ${DOCKER_IMAGE}"
+                    }
                 }
             }
         }
